@@ -9,7 +9,7 @@ const redditScraper = async (url, minutes) => {
     const now = Date.now()
     const minutesAgo = now - (minutes * 1000 * 60)
     //Creates a Headless Browser Instance in the Background
-    const browser = await puppeteer.launch()
+    const browser = await puppeteer.launch({headless: true, args: ['--no-sandbox']});
 
     //Creates a Page Instance, similar to creating a new Tab
     const page = await browser.newPage()

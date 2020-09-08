@@ -7,6 +7,12 @@ const port = process.env.PORT || 8080;
 //Import puppeteer function
 const {redditScraper} = require('./scraper');
 
+//Allows CORS
+app.use((req, res, next) => {
+    res.header('Access-Control-Allow-Origin', '*');
+    next();
+  });
+  
 //Catches requests made to localhost:3000/search
 app.get('/search', (request, response) => {
 

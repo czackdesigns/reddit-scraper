@@ -1,5 +1,6 @@
 const express = require('express');
 const app = express();
+const cors = require('cors')
 
 const ip = process.env.IP || '0.0.0.0';
 const port = process.env.PORT || 3000;
@@ -8,14 +9,13 @@ const port = process.env.PORT || 3000;
 const { redditScraper } = require('./scraper');
 
 //Allows CORS
-app.all('/search', function(req, res, next) {
-    res.header("Access-Control-Allow-Origin", "*");
-    res.header("Access-Control-Allow-Headers", "X-Requested-With");
-    next()
-});
+const corsOptions = {
+    origin: 'https://reddit-word-counter.herokuapp.com/',
+    optionsSuccessStatus: 200
+}
   
 //Catches requests made to localhost:3000/search
-app.get('/search', (request, response) => {
+app.get('/search', cors(corsOptions), (request, response) => {
 
     //Holds value of the query param 'searchquery'.
     const searchQuery = request.query.searchquery.split('-');

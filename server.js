@@ -10,7 +10,7 @@ const { redditScraper } = require('./scraper');
 
 //Allows CORS
 const corsOptions = {
-    origin: 'https://reddit-word-counter.herokuapp.com/',
+    origin: 'https://reddit-word-counter.herokuapp.com',
     optionsSuccessStatus: 200
 }
   

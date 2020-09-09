@@ -1,6 +1,6 @@
 const express = require('express');
 const app = express();
-
+const timeout = require('connect-timeout')
 const ip = process.env.IP || '0.0.0.0';
 const port = process.env.PORT || 3000;
 
@@ -34,6 +34,8 @@ app.get('/search', (request, response) => {
         response.end();
     }
 });
+  
 
 //Initialises the express server on the port 30000
-app.listen(port, ip);
+const server = app.listen(port, ip);
+server.setTimeout(500000)

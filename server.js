@@ -28,7 +28,7 @@ app.get('/search', (request, response) => {
                 response.status(200);
                 response.json(results);
             })
-            .catch(console.log)
+            .catch(error => console.log(error))
     } else {
         response.end();
     }

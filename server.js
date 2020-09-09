@@ -9,13 +9,12 @@ const port = process.env.PORT || 3000;
 const { redditScraper } = require('./scraper');
 
 //Allows CORS
-const corsOptions = {
-    origin: 'https://reddit-word-counter.herokuapp.com/:1',
-    optionsSuccessStatus: 200
-}
+app.use(cors({
+    origin: 'https://reddit-word-counter.herokuapp.com'
+}))
   
 //Catches requests made to localhost:3000/search
-app.get('/search', cors(corsOptions), (request, response) => {
+app.get('/search', (request, response) => {
 
     //Holds value of the query param 'searchquery'.
     const searchQuery = request.query.searchquery.split('-');

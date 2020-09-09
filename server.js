@@ -2,16 +2,17 @@ const express = require('express');
 const app = express();
 
 const ip = process.env.IP || '0.0.0.0';
-const port = process.env.PORT || 8080;
+const port = process.env.PORT || 3000;
 
 //Import puppeteer function
 const { redditScraper } = require('./scraper');
 
 //Allows CORS
-app.use((req, res, next) => {
-    res.header('Access-Control-Allow-Origin', '*');
-    next();
-  });
+app.all('/search', function(req, res, next) {
+    res.header("Access-Control-Allow-Origin", "*");
+    res.header("Access-Control-Allow-Headers", "X-Requested-With");
+    next()
+});
   
 //Catches requests made to localhost:3000/search
 app.get('/search', (request, response) => {
@@ -27,7 +28,8 @@ app.get('/search', (request, response) => {
                 //Returns a 200 Status OK with Results JSON back to the client.
                 response.status(200);
                 response.json(results);
-            });
+            })
+            .catch(console.log)
     } else {
         response.end();
     }

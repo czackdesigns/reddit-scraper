@@ -1,10 +1,6 @@
 const puppeteer = require('puppeteer')
 const { getSearchResults } = require('./getSearchResults')
 
-const url = 'bad_cop_no_donut'
-const minutes = 5
-
-
 const redditScraper = async (url, minutes) => {
     const now = Date.now()
     const minutesAgo = now - (minutes * 1000 * 60)

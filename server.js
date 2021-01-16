@@ -1,6 +1,6 @@
 const express = require('express');
 const app = express();
-const timeout = require('connect-timeout')
+
 const ip = process.env.IP || '0.0.0.0';
 const port = process.env.PORT || 3000;
 
@@ -10,13 +10,11 @@ const { redditScraper } = require('./scraper');
 //Allows CORS
 app.use(function(req, res, next) {
     res.header("Access-Control-Allow-Origin", "*");
-    res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
     next();
   })
   
 //Catches requests made to localhost:3000/search
 app.get('/search', (request, response) => {
-
     //Holds value of the query param 'searchquery'.
     const searchQuery = request.query.searchquery.split('-');
 
@@ -37,5 +35,4 @@ app.get('/search', (request, response) => {
   
 
 //Initialises the express server on the port 30000
-const server = app.listen(port, ip);
-server.setTimeout(500000)
+app.listen(port, ip);

@@ -8,8 +8,10 @@ const port = process.env.PORT || 3000;
 const { redditScraper } = require('./scraper');
 
 //Allows CORS
-app.all('/', function(req, res, next) {
+app.get('/', function(req, res, next) {
     res.header("Access-Control-Allow-Origin", "*");
+    res.header("Content-Type", "application/x-www-form-urlencoded");
+    res.header("Access-Control-Allow-Methods", "GET")
     next()
   });
   

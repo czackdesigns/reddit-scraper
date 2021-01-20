@@ -6,17 +6,13 @@ const port = process.env.PORT || 3000;
 
 //Import puppeteer function
 const { redditScraper } = require('./scraper');
-
-//Allows CORS
-app.get('/', function(req, res, next) {
+  
+//Catches requests made to localhost:3000/search
+app.get('/search', (request, response, next) => {
     res.header("Access-Control-Allow-Origin", "*");
     res.header("Content-Type", "application/x-www-form-urlencoded");
     res.header("Access-Control-Allow-Methods", "GET")
     next()
-  });
-  
-//Catches requests made to localhost:3000/search
-app.get('/search', (request, response) => {
     //Holds value of the query param 'searchquery'.
     const searchQuery = request.query.searchquery.split('-');
 

@@ -4,15 +4,21 @@ const app = express();
 const ip = process.env.IP || '0.0.0.0';
 const port = process.env.PORT || 3000;
 
+const cors = require('cors')
+
 //Import puppeteer function
 const { redditScraper } = require('./scraper');
-  
-//Catches requests made to localhost:3000/search
-app.get('/search', (request, response, next) => {
+
+//Allows CORS
+app.get('/', cors(), (req, res, next) =>{
     res.header("Access-Control-Allow-Origin", "*");
     res.header("Content-Type", "application/x-www-form-urlencoded");
     res.header("Access-Control-Allow-Methods", "GET")
     next()
+  });
+  
+//Catches requests made to localhost:3000/search
+app.get('/search', (request, response, next) => {
     //Holds value of the query param 'searchquery'.
     const searchQuery = request.query.searchquery.split('-');
 

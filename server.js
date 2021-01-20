@@ -8,10 +8,11 @@ const port = process.env.PORT || 3000;
 const { redditScraper } = require('./scraper');
 
 //Allows CORS
-app.use(function(req, res, next) {
-    res.header("Access-Control-Allow-Origin", "https://justasmallsampling.web.app");
-    next();
-  })
+app.all('/', function(req, res, next) {
+    res.header("Access-Control-Allow-Origin", "*");
+    res.header("Access-Control-Allow-Headers", "X-Requested-With");
+    next()
+  });
   
 //Catches requests made to localhost:3000/search
 app.get('/search', (request, response) => {
